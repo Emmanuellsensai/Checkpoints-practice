@@ -1,9 +1,4 @@
-I will generate the `findprevprime.go` file with the `FindPrevPrime` function and provide an extensive explanation.
-
-
-http://googleusercontent.com/immersive_entry_chip/0
-
-### 🔍 Extensive Explanation
+# 🔍 Extensive Explanation For FindPrevPrime
 
 **Concept:**
 A **Prime Number** is a number greater than 1 that has no divisors other than 1 and itself. The goal of `FindPrevPrime` is to find the largest prime number that is less than or equal to the input `nb`.
