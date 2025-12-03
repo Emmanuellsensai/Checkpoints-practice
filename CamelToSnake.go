@@ -1,40 +1,59 @@
-I will update the `cameltosnakecase.go` file with the strict validation logic you provided and then explain it extensively.
+package piscine
 
+func CamelToSnakeCase(s string) string {
+	// 1. Empty Check
+	if s == "" {
+		return ""
+	}
 
-http://googleusercontent.com/immersive_entry_chip/0
+	// --- VALIDATION PHASE ---
+	// Before converting, we check if the string adheres to strict CamelCase rules.
+	// If it violates any rule, we return the original string 's' unchanged.
 
-### 🔍 Extensive Line-by-Line Explanation
+	for i := 0; i < len(s); i++ {
+		// Rule A: Numbers or punctuation are not allowed.
+		// We check if the character is OUTSIDE the range of A-Z AND a-z.
+		if (s[i] < 'A' || s[i] > 'Z') && (s[i] < 'a' || s[i] > 'z') {
+			return s
+		}
 
-This implementation is divided into two distinct phases: **Validation** (checking strict rules) and **Conversion** (transforming the string).
+		// Checks specific to Uppercase letters
+		if s[i] >= 'A' && s[i] <= 'Z' {
+			// Rule B: The string cannot END with a capitalized letter.
+			// If we are at the last index (len-1) and it's uppercase -> Invalid.
+			if i == len(s)-1 {
+				return s
+			}
 
-#### 1. Setup
-* **`package piscine`**: Declares this function belongs to the `piscine` package.
-* **`func CamelToSnakeCase(s string) string`**: Defines the function taking a string `s` and returning a string.
-* **`if s == "" { return "" }`**: Edge case check. If the string is empty, return empty immediately.
+			// Rule C: No two capitalized letters can follow each other directly.
+			// We check the next character (s[i+1]).
+			// Note: This access is safe because we already verified (i != len-1) above.
+			if s[i+1] >= 'A' && s[i+1] <= 'Z' {
+				return s
+			}
+		}
+	}
 
-#### 2. Phase 1: Validation
-The prompt implies that if the string is not "proper" CamelCase, we should not touch it. We iterate using a standard C-style loop (`for i := 0...`) because we need easy access to the **next** character (`i+1`) for lookahead checks.
+	// --- CONVERSION PHASE ---
+	// If the string survived validation, we construct the snake_case version.
 
-* **`for i := 0; i < len(s); i++`**: Loops through every byte index of the string.
-* **`if (s[i] < 'A' || s[i] > 'Z') && (s[i] < 'a' || s[i] > 'z')`**: This checks if a character is **NOT** a letter.
-    * If `s[i]` is not between 'A'-'Z' **AND** not between 'a'-'z', it must be a number (`1`, `2`) or symbol (`?`, `_`).
-    * **Action:** `return s`. Return original string immediately (invalid format).
-* **`if s[i] >= 'A' && s[i] <= 'Z'`**: Focuses on **Uppercase** letters to check structure rules.
-    * **`if i == len(s)-1`**: Checks if this uppercase letter is the **last** character of the string.
-        * **Rule:** CamelCase words generally shouldn't end in a capital (e.g., "HelloWorlD" is weird).
-        * **Action:** `return s` (Invalid).
-    * **`if s[i+1] >= 'A' && s[i+1] <= 'Z'`**: Checks the **next** character (`s[i+1]`).
-        * **Rule:** No consecutive caps (e.g., "CAMEL").
-        * **Action:** `return s` (Invalid).
+	result := ""
+	for i, r := range s {
+		// If character is Uppercase
+		if r >= 'A' && r <= 'Z' {
+			// 1. Insert Underscore
+			// We only insert if it's NOT the very first letter.
+			if i != 0 {
+				result += "_"
+			}
+			// 2. Convert to Lowercase
+			// 'A'(65) + 32 = 'a'(97). We shift the ASCII value.
+			result += string(r + 32)
+		} else {
+			// If character is Lowercase, append it exactly as is.
+			result += string(r)
+		}
+	}
 
-#### 3. Phase 2: Conversion
-If the loop finishes without returning `s`, the string is valid. Now we build the new string.
-
-* **`result := ""`**: Buffer to hold the new string.
-* **`for i, r := range s`**: We use `range` here because it's cleaner for accessing characters (runes) and indices when we don't need complex lookaheads anymore.
-* **`if r >= 'A' && r <= 'Z'`**: If current char is Uppercase:
-    * **`if i != 0 { result += "_" }`**: Check if it is **not** the start of the string. If it's inside the string, this uppercase letter marks a new word, so we put a `_` separator before it.
-    * **`result += string(r + 32)`**: Convert to lowercase. Adding 32 to an uppercase ASCII rune gives its lowercase equivalent. Append it.
-* **`else`**: If current char is Lowercase:
-    * **`result += string(r)`**: Just append it as is.
-* **`return result`**: Return the finished snake_case string.
+	return result
+}
