@@ -6,16 +6,19 @@ func CamelToSnakeCase(s string) string {
 	}
 	result := ""
 	for i, r := range s {
-		// If Uppercase...
+		// Check if the character is Uppercase
 		if r >= 'A' && r <= 'Z' {
-			// AND not at start, AND previous char wasn't underscore...
-			// AND (typically) we check if the char is actually the start of a new word
-			// (Handling weird cases like CamelCase vs CamelCASE is tricky, standard logic below)
-			if i != 0 && (s[i-1] < 'A' || s[i-1] > 'Z') {
+			// If it's not the first letter, and the previous letter was not uppercase
+			// (OR depending on subject, simply if the previous was lowercase)
+			if i != 0 && (s[i-1] >= 'a' && s[i-1] <= 'z') {
 				result += "_"
 			}
+			// Append the Lowercase version of the character
+			result += string(r + 32)
+		} else {
+			// Append character as is
+			result += string(r)
 		}
-		result += string(r)
 	}
 	return result
 }
