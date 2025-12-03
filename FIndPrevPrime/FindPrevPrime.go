@@ -1,13 +1,11 @@
 package piscine
 
 func FindPrevPrime(nb int) int {
-
 	if nb < 2 {
 		return 0
 	}
 
 	for i := nb; i >= 2; i-- {
-		
 		isPrime := true
 
 		for j := 2; j*j <= i; j++ {
@@ -17,7 +15,6 @@ func FindPrevPrime(nb int) int {
 				break 
 			}
 		}
-
 		if isPrime {
 			return i
 		}
