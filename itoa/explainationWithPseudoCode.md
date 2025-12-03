@@ -181,15 +181,15 @@ func Itoa(n int) string {
 
 Emphasize:
 
-### **✔ The algorithm works WITHOUT using strconv**
+### **✔ The algorithm works WITHOUT using strconv.**
 
 ### **✔ We manually extract digits with % and /**
 
-### **✔ Strings can be built from runes**
+### **✔ Strings can be built from runes.**
 
-### **✔ Negative numbers need special handling**
+### **✔ Negative numbers need special handling.**
 
-### **✔ Reversal is required because digits come out backwards**
+### **✔ Reversal is required because digits come out backwards.**
 
 ---
 

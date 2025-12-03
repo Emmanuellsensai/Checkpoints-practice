@@ -31,34 +31,34 @@ STEP 8 — Return the final string.
 
 func Itoa(n int) string {
 
-    // Handle zero case early
+    // Handle zero case early.
     if n == 0 {
         return "0"
     }
 
     negative := false
 
-    // STEP: Handle negative numbers
+    // STEP: Handle negative numbers.
     if n < 0 {
         negative = true
-        n = -n // Work with positive version
+        n = -n // Work with positive version.
     }
 
     result := ""
 
-    // STEP: Extract digits and build result in reverse
+    // STEP: Extract digits and build result in reverse.
     for n > 0 {
         digit := n % 10
         result += string(rune('0' + digit))
         n /= 10
     }
 
-    // STEP: Add negative sign if needed
+    // STEP: Add negative sign if needed.
     if negative {
         result += "-"
     }
 
-    // STEP: Reverse the string because digits were appended backwards
+    // STEP: Reverse the string because digits were appended backwards.
     reversed := ""
     for i := len(result) - 1; i >= 0; i-- {
         reversed += string(result[i])
