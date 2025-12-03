@@ -30,3 +30,4 @@ func FindPrevPrime(nb int) int {
 
 	return 0
 }
+
