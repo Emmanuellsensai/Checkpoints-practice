@@ -1,4 +1,6 @@
-package piscine
+package main
+
+import "fmt"
 
 func FindPrevPrime(nb int) int {
 	// 1. Edge Case: Numbers less than 2 cannot be prime.
@@ -9,7 +11,7 @@ func FindPrevPrime(nb int) int {
 	// 2. Loop Backwards from 'nb' down to 2.
 	// We want the highest prime less than or equal to 'nb'.
 	for i := nb; i >= 2; i-- {
-		
+
 		// Assume 'i' is prime until we find a divisor.
 		isPrime := true
 
@@ -31,3 +33,8 @@ func FindPrevPrime(nb int) int {
 	return 0
 }
 
+
+func main() {
+	fmt.Println(FindPrevPrime(5))
+	fmt.Println(FindPrevPrime(4))
+}
