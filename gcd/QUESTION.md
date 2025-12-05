@@ -1,6 +1,6 @@
-## gcd
+# GCD - _(Greatest common divisor)_
 
-### Instructions
+## Instructions
 
 Write a function that takes two `uint` representing two strictly positive integers and returns their greatest common divisor.
 If any of the input numbers is 0, the function should return 0.
